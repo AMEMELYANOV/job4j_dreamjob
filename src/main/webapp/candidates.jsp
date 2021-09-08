@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page import="ru.job4j.dream.model.Candidate" %>
-<%@ page import="java.util.Collection" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,12 +32,29 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">Фотография</th>
+                        <th scope="col">Добавить фото</th>
+                        <th scope="col">Удалить кандидата</th>
                         <th scope="col">Названия</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${candidates}" var="can">
                         <tr>
+                            <td>
+                                <img src="<c:url value='/download.do?id=${can.id}'/>" width="100px" height="100px"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value="PhotoUpload.jsp?id=${can.id}"/>">
+                                    <button type="submit" class="btn btn-primary">Добавить фото</button>
+                                </a>
+                            </td>
+                            <td>
+                                <form action="<c:url value="/delete.do"/>" method="post">
+                                    <input type="hidden" name="id" value='<c:out value="${can.id}"/>'/>
+                                    <input type="submit" class="btn btn-primary" value="Удалить"/>
+                                </form>
+                            </td>
                             <td>
                                 <a href='<c:url value="/candidate/edit.jsp?id=${can.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
@@ -50,6 +65,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">Назад</a>
             </div>
         </div>
     </div>

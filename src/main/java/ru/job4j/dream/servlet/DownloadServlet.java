@@ -1,4 +1,7 @@
-package ru.job4j.servlets;
+package ru.job4j.dream.servlet;
+
+import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.store.Store;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +14,11 @@ import java.io.IOException;
 public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        int id = Integer.parseInt(req.getParameter("id"));
         File downloadFile = null;
         for (File file : new File("C:\\images\\").listFiles()) {
-            if (name.equals(file.getName())) {
+            Candidate currentCandidate = Store.instOf().findCandidateById(id);
+            if (currentCandidate.getPhoto().getFileName().equals(file.getName())) {
                 downloadFile = file;
                 break;
             }

@@ -1,11 +1,14 @@
-package ru.job4j.servlets;
+package ru.job4j.dream.servlet;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
+import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Image;
+import ru.job4j.dream.store.Store;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,20 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UploadServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> images = new ArrayList<>();
-        for (File name : new File("c:\\images\\").listFiles()) {
-            images.add(name.getName());
-        }
-        req.setAttribute("images", images);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/upload.jsp");
-        dispatcher.forward(req, resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,15 +36,25 @@ public class UploadServlet extends HttpServlet {
             }
             for (FileItem item : items) {
                 if (!item.isFormField()) {
-                    File file = new File(folder + File.separator + item.getName());
-                    try (FileOutputStream out = new FileOutputStream(file)) {
-                        out.write(item.getInputStream().readAllBytes());
+                    if (item.getName().length() != 0) {
+                        int id = Integer.parseInt(req.getParameter("id"));
+                        String fileName = id + "." + FilenameUtils.getExtension(item.getName());
+                        File file = new File(folder + File.separator
+                                + fileName);
+                        try (FileOutputStream out = new FileOutputStream(file)) {
+                            out.write(item.getInputStream().readAllBytes());
+                        }
+                        Candidate currentCandidate = Store.instOf()
+                                .findCandidateById(id);
+                        Store.instOf().save(new Candidate(
+                                id, currentCandidate.getName(),
+                                new Image(currentCandidate.getId(), fileName)));
                     }
                 }
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        doGet(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <!doctype html>
 <html lang="en">
@@ -34,7 +33,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новая вакансия.
+                Новый кандидат.
                 <% } else { %>
                 Редактирование вакансии.
                 <% } %>
@@ -47,6 +46,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">Назад</a>
             </div>
         </div>
     </div>

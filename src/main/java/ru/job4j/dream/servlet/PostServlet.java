@@ -22,7 +22,7 @@ public class PostServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         Store.instOf().save(
                 new Post(
-                        Integer.valueOf(req.getParameter("id")),
+                        Integer.parseInt(req.getParameter("id")),
                         req.getParameter("name")
                 )
         );

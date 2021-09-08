@@ -46,6 +46,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">Назад</a>
             </div>
         </div>
     </div>
