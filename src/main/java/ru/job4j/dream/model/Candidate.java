@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
-    private Image photo;
+    private String photoFileName;
 
     public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Candidate(int id, String name, Image photo) {
+    public Candidate(int id, String name, String photoFileName) {
         this.id = id;
         this.name = name;
-        this.photo = photo;
+        this.photoFileName = photoFileName;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class Candidate {
         this.name = name;
     }
 
-    public Image getPhoto() {
-        return photo;
+    public String getPhotoFileName() {
+        return photoFileName;
     }
 
-    public void setPhoto(Image photo) {
-        this.photo = photo;
+    public void setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
     }
 
     @Override

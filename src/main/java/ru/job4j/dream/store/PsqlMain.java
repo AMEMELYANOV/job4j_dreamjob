@@ -10,11 +10,11 @@ public class PsqlMain {
             System.out.println(post.getId() + " " + post.getName());
         }
 
-        Post post = store.findById(1);
+        Post post = store.findPostById(1);
         System.out.println("Post: id = " + post.getId() + ", name = " + post.getName());
 
         store.save(new Post(1, "New Java Job"));
-        post = store.findById(1);
+        post = store.findPostById(1);
         System.out.println("Post: id = " + post.getId() + ", name = " + post.getName());
     }
 }
