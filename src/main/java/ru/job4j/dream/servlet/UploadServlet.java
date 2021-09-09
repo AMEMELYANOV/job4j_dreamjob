@@ -7,7 +7,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Image;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.MemStore;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -44,9 +44,9 @@ public class UploadServlet extends HttpServlet {
                         try (FileOutputStream out = new FileOutputStream(file)) {
                             out.write(item.getInputStream().readAllBytes());
                         }
-                        Candidate currentCandidate = Store.instOf()
+                        Candidate currentCandidate = MemStore.instOf()
                                 .findCandidateById(id);
-                        Store.instOf().save(new Candidate(
+                        MemStore.instOf().save(new Candidate(
                                 id, currentCandidate.getName(),
                                 new Image(currentCandidate.getId(), fileName)));
                     }

@@ -1,7 +1,7 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ public class DownloadServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         File downloadFile = null;
         for (File file : new File("C:\\images\\").listFiles()) {
-            Candidate currentCandidate = Store.instOf().findCandidateById(id);
+            Candidate currentCandidate = MemStore.instOf().findCandidateById(id);
             if (currentCandidate.getPhoto().getFileName().equals(file.getName())) {
                 downloadFile = file;
                 break;

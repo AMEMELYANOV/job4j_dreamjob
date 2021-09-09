@@ -1,7 +1,7 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +23,12 @@ public class DeleteCandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         File folder = new File("c:\\images\\");
-        Candidate currentCandidate = Store.instOf().findCandidateById(id);
+        Candidate currentCandidate = MemStore.instOf().findCandidateById(id);
         if (currentCandidate.getPhoto() != null) {
             Files.deleteIfExists(Paths.get(folder + File.separator
                     + currentCandidate.getPhoto().getFileName()));
         }
-        Store.instOf().deleteCandidateByID(id);
+        MemStore.instOf().deleteCandidateByID(id);
         doGet(req, resp);
     }
 }
