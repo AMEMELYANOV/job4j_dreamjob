@@ -21,7 +21,8 @@ import java.util.List;
 public class UploadServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp) throws ServletException, IOException {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -45,7 +46,8 @@ public class UploadServlet extends HttpServlet {
                         }
                         Candidate currentCandidate = PsqlStore.instOf()
                                 .findCandidateById(id);
-                        PsqlStore.instOf().save(new Candidate(id, currentCandidate.getName(), fileName));
+                        PsqlStore.instOf().save(new Candidate(id,
+                                currentCandidate.getName(), fileName));
                     }
                 }
             }

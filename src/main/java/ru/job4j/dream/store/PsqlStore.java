@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class PsqlStore implements Store {
-
-    private final BasicDataSource pool = new BasicDataSource();
     private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
+    private final BasicDataSource pool = new BasicDataSource();
 
     private PsqlStore() {
         Properties cfg = new Properties();
@@ -142,7 +141,8 @@ public class PsqlStore implements Store {
 
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, photoFileName) VALUES (?, ?)",
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO candidate(name, photoFileName) VALUES (?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getPhotoFileName());

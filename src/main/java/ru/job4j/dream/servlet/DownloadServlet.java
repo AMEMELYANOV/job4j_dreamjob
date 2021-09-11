@@ -13,19 +13,22 @@ import java.io.IOException;
 
 public class DownloadServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         File downloadFile = null;
         Candidate currentCandidate = PsqlStore.instOf().findCandidateById(id);
         for (File file : new File("C:\\images\\").listFiles()) {
-            if (currentCandidate.getPhotoFileName() != null && currentCandidate.getPhotoFileName().equals(file.getName())) {
+            if (currentCandidate.getPhotoFileName() != null
+                    && currentCandidate.getPhotoFileName().equals(file.getName())) {
                     downloadFile = file;
                     break;
             }
         }
         resp.setContentType("application/octet-stream");
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFile.getName() + "\"");
-        try (FileInputStream stream = new FileInputStream(downloadFile)){
+        resp.setHeader("Content-Disposition", "attachment; filename=\""
+                + downloadFile.getName() + "\"");
+        try (FileInputStream stream = new FileInputStream(downloadFile)) {
             resp.getOutputStream().write(stream.readAllBytes());
         }
     }
