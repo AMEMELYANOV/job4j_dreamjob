@@ -9,14 +9,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function validate() {
+            let rsl = true;
             const ids = ["inputName", "inputSurname", "inputDescription"];
             ids.forEach(function (item) {
                 let el = $(`#${item}`);
                 if (el.val() === '') {
                     alert(el.attr('title'));
+                    rsl = false;
                 }
             })
-            return false;
+            return rsl;
+        }
+
+        function addRow() {
+            if (validate()) {
+                const name = $('#inputName').val();
+                const surName = $('#inputSurname').val();
+                const sex = document.getElementById('male').checked ? "Мужчина" : "Женщина";
+                const desc = $('#inputDescription').val();
+
+                $('#table tr:last').after('<tr><td>' + name + '</td><td>' + surName + '</td><td>'
+                    + sex + '</td><td>' + desc + '</td></tr>');
+            }
         }
     </script>
 </head>
@@ -32,8 +46,8 @@
             <input type="text" class="form-control" id="inputSurname" title="Please enter surname">
         </div>
         <div class="form-group">
-            <label class="radio-inline"><input type="radio" name="sex" checked>Мужчина</label>
-            <label class="radio-inline"><input type="radio" name="sex">Женщина</label>
+            <label for="male" class="radio-inline"><input type="radio" name="sex" id="male" checked>Мужчина</label>
+            <label for="female" class="radio-inline"><input type="radio" name="sex" id="female">Женщина</label>
         </div>
         <div class="form-group">
             <label for="inputDescription">Описание</label>
@@ -41,7 +55,7 @@
         </div>
         <button type="submit" class="btn btn-primary" onclick="return validate();">Разместить</button>
     </form>
-    <table class="table">
+    <table class="table" id='table'>
         <thead>
         <tr>
             <th scope="col">Имя</th>
@@ -65,6 +79,7 @@
         </tr>
         </tbody>
     </table>
+    <button type="reset" class="btn btn-default" onclick="addRow()">Добавить строку</button>
 </div>
 </body>
 </html>
