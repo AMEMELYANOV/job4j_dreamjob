@@ -12,26 +12,48 @@
 
 <script>
     function sendGreeting() {
-        const email = $('#exampleInputEmail1').val();
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/dreamjob/greet',
+            data: JSON.stringify({
+                name: $('#exampleInputEmail1').val()
+            }),
+            dataType: 'json'
+        }).done(function (data) {
+            $('#emailList li:last').append(`<li>${data.name}</li>`)
+        }).fail(function (err) {
+            console.log(err);
+        });
+    }
+
+    $(document).ready(function () {
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + email,
-            dataType: 'text'
-        }).done(function() {
-            $('#cont form:first').before('<h1>' + email + '</h1>');
-        }).fail(function(err) {alert(err);});
-    }
+            dataType: 'json'
+        }).done(function (data) {
+            for (var email of data) {
+                $('#emailList li:last').append(`<li>${email.name}</li>`)
+            }
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
 </script>
-
-<div class="container" id="cont">
+<div class="container">
     <form>
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email">
         </div>
-        <button type="reset" class="btn btn-primary" onclick="sendGreeting();">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
     </form>
+    <br>
+    Почты:
+    <ul id="emailList">
+        <li></li>
+    </ul>
 </div>
 </body>
 </html>
