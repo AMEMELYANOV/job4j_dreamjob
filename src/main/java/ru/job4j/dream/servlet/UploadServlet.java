@@ -46,8 +46,8 @@ public class UploadServlet extends HttpServlet {
                         }
                         Candidate currentCandidate = PsqlStore.instOf()
                                 .findCandidateById(id);
-                        PsqlStore.instOf().save(new Candidate(id,
-                                currentCandidate.getName(), fileName));
+                        PsqlStore.instOf().save(new Candidate(id, currentCandidate.getName(),
+                                fileName, currentCandidate.getCityId()));
                     }
                 }
             }

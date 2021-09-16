@@ -12,6 +12,19 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+
+  <servlet>
+    <servlet-name>EditCandidateServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.EditCandidateServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>EditPostServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.EditPostServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CityServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CityServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>PostServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
@@ -54,6 +67,18 @@
   </servlet>
 
   <servlet-mapping>
+    <servlet-name>EditCandidateServlet</servlet-name>
+    <url-pattern>/editCandidate.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditPostServlet</servlet-name>
+    <url-pattern>/editPost.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CityServlet</servlet-name>
+    <url-pattern>/cities.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/posts.do</url-pattern>
   </servlet-mapping>
@@ -93,4 +118,5 @@
     <servlet-name>GreetingServlet</servlet-name>
     <url-pattern>/greet</url-pattern>
   </servlet-mapping>
+
 </web-app>

@@ -3,6 +3,7 @@ package ru.job4j.dream.store;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
+import ru.job4j.dream.model.City;
 
 import java.util.Collection;
 import java.util.Map;
@@ -28,8 +29,23 @@ public class MemStore implements Store {
         return posts.values();
     }
 
+    @Override
+    public Collection<Post> findPostsByDay() {
+        return null;
+    }
+
     public Collection<Candidate> findAllCandidates() {
         return candidates.values();
+    }
+
+    @Override
+    public Collection<Candidate> findCandidatesByDay() {
+        return null;
+    }
+
+    @Override
+    public Collection<City> findAllCities() {
+        return null;
     }
 
     public void save(Post post) {

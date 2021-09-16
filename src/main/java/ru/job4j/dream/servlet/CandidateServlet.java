@@ -24,7 +24,9 @@ public class CandidateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         PsqlStore.instOf().save(new Candidate(
                 Integer.parseInt(req.getParameter("id")),
-                req.getParameter("name")));
+                req.getParameter("name"),
+                req.getParameter("photoFileName"),
+                Integer.parseInt(req.getParameter("cityId"))));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
