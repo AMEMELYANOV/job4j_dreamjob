@@ -10,6 +10,11 @@ public class Candidate {
     private int cityId;
     private final LocalDateTime created = LocalDateTime.now();
 
+    public Candidate(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Candidate(int id, String name, int cityId) {
         this.id = id;
         this.name = name;

@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/AMEMELYANOV/job4j_dreamjob.svg?branch=master)](https://app.travis-ci.com/AMEMELYANOV/job4j_dreamjob)
+[![codecov](https://codecov.io/gh/AMEMELYANOV/job4j_dreamjob/branch/master/graph/badge.svg?token=3WRO3X5952)](https://codecov.io/gh/AMEMELYANOV/job4j_dreamjob)
 # job4j_dreamjob
 Проект "Работа мечты"
 ## Описание проектв
